@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <title>Apple Timer</title>
+  <style>
+    body {
+      margin: 0px;
+    }
+
+    div#image-container {
+      width: 100%;
+      overflow: hidden;
+    }
+
+    @media screen and (max-width:480px) {
+      img#image {
+        width: 200%;
+        margin-left: -50%;
+      }
+    }
+    @media screen and (min-width:480px) and (max-width:960px)  {
+      img#image {
+        width: 100%;
+      }
+    }
+    @media screen {
+      img#image {
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div id="image-container">
+  <img id="image" src="images/apple00.jpg" />
+</div>
+
+<ul id="output">
+</ul>
+
+</body>
+
+<script src="index.js"></script>
+
+</html>

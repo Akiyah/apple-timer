@@ -1,7 +1,7 @@
 var image = document.getElementById('image');
 var output = document.getElementById('output');
 var intervalId;
-var count = 0;
+var count = 20;
 var dragging = false;
 var dragStartPoint;
 var dragStartCount;
@@ -13,6 +13,8 @@ window.onload = function() {
   image.addEventListener('touchstart', touchstart, false);
   image.addEventListener('touchmove',  touchmove,  false);
   image.addEventListener('touchend',   touchend,   false);
+
+  stop();
 }
 
 function mousedown(e)  { e.preventDefault(); start(e.clientX, e.clientY); }

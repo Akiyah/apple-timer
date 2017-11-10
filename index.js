@@ -55,7 +55,7 @@ function stop() {
     if (count === 0) {
       window.clearInterval(intervalId);
     }
-  }, 1000);
+  }, 500);
 }
 
 function show(count) {

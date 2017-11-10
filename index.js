@@ -1,4 +1,4 @@
-var image = document.getElementById('image');
+var imageContainer = document.getElementById('image-container');
 var output = document.getElementById('output');
 var intervalId;
 var count = 20;
@@ -7,12 +7,12 @@ var dragStartPoint;
 var dragStartCount;
 
 window.onload = function() {
-  image.addEventListener('mousedown',  mousedown,  false);
-  image.addEventListener('mouseup',    mouseup,    false);
-  image.addEventListener('mousemove',  mousemove,  false);
-  image.addEventListener('touchstart', touchstart, false);
-  image.addEventListener('touchmove',  touchmove,  false);
-  image.addEventListener('touchend',   touchend,   false);
+  imageContainer.addEventListener('mousedown',  mousedown,  false);
+  imageContainer.addEventListener('mouseup',    mouseup,    false);
+  imageContainer.addEventListener('mousemove',  mousemove,  false);
+  imageContainer.addEventListener('touchstart', touchstart, false);
+  imageContainer.addEventListener('touchmove',  touchmove,  false);
+  imageContainer.addEventListener('touchend',   touchend,   false);
 
   stop();
 }
@@ -59,7 +59,16 @@ function stop() {
 }
 
 function show(count) {
-  image.src = "images/apple" + (count < 10 ? "0" : "") + count + ".jpg";
+  //image.src = "images/apple" + (count < 10 ? "0" : "") + count + ".jpg";
+  var nodes = imageContainer.childNodes;
+  var index = 0;
+  for (var i = 0; i < nodes.length; i++) {
+    var node = nodes[i];
+    if (node.nodeName === "IMG") {
+      node.style.display = (count === index ? "inline" : "none");
+      index += 1;
+    }
+  }
 }
 
 function log(message) {

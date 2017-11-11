@@ -5,6 +5,7 @@ var count = 20;
 var dragging = false;
 var dragStartPoint;
 var dragStartCount;
+var ringPower = true;
 
 window.onload = function() {
   imageContainer.addEventListener('mousedown',  mousedown,  false);
@@ -30,6 +31,7 @@ function start(x, y) {
   dragStartCount = count;
 
   if (intervalId) {
+    imageContainer.style.transform = "";
     window.clearInterval(intervalId);
   }
 }
@@ -42,6 +44,9 @@ function move(x, y) {
     var c = dragStartCount + dc;
     count = Math.max(0, Math.min(20, c));
     show(count);
+    if (count >= 10) {
+      ringPower = true;
+    }
   }
 }
 
@@ -54,12 +59,29 @@ function stop() {
     show(count);
     if (count === 0) {
       window.clearInterval(intervalId);
+      ring();
     }
   }, 500);
 }
 
+function ring() {
+  if (!ringPower) {
+    return;
+  }
+  ringPower = false;
+
+  var i = 20;
+  intervalId = window.setInterval(function () {
+    i--;
+    imageContainer.style.transform = (i % 2 == 0 ? "rotate(-3deg)" : "rotate(3deg)");
+    if (i <= 0) {
+      imageContainer.style.transform = "";
+      window.clearInterval(intervalId);
+    }
+  }, 50);
+}
+
 function show(count) {
-  //image.src = "images/apple" + (count < 10 ? "0" : "") + count + ".jpg";
   var nodes = imageContainer.childNodes;
   var index = 0;
   for (var i = 0; i < nodes.length; i++) {

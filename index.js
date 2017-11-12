@@ -31,7 +31,7 @@ function start(x, y) {
   dragStartCount = count;
 
   if (intervalId) {
-    imageContainer.style.transform = "";
+    transform("");
     window.clearInterval(intervalId);
   }
 }
@@ -70,15 +70,27 @@ function ring() {
   }
   ringPower = false;
 
-  var i = 20;
+  var audio = new Audio();
+  audio.src = "sounds/ring.mp3";
+  audio.play();
+
+  var i = 60;
   intervalId = window.setInterval(function () {
     i--;
-    imageContainer.style.transform = (i % 2 == 0 ? "rotate(-3deg)" : "rotate(3deg)");
+    transform(i % 2 == 0 ? "rotate(-3deg)" : "rotate(3deg)")
     if (i <= 0) {
-      imageContainer.style.transform = "";
+      transform("");
       window.clearInterval(intervalId);
     }
   }, 50);
+}
+
+function transform(value) {
+  imageContainer.style.setProperty('transform', value);
+  imageContainer.style.setProperty('-moz-transform', value);
+  imageContainer.style.setProperty('-webkit-transform', value);
+  imageContainer.style.setProperty('-o-transform', value);
+  imageContainer.style.setProperty('-ms-transform', value);
 }
 
 function show(count) {

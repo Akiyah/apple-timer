@@ -1,6 +1,8 @@
 var imageContainer = document.getElementById('image-container');
 var output = document.getElementById('output');
+var secSpan = document.getElementById('sec');
 var intervalId;
+var sec = 10;
 var count = 20;
 var dragging = false;
 var dragStartPoint;
@@ -15,7 +17,23 @@ window.onload = function() {
   imageContainer.addEventListener('touchmove',  touchmove,  false);
   imageContainer.addEventListener('touchend',   touchend,   false);
 
+  var params = parseUrlParameter();
+  if ("sec" in params) {
+    sec = params["sec"];
+    secSpan.innerHTML = sec;
+  }
+
   stop();
+}
+
+function parseUrlParameter() {
+  var params = {};
+  var pair = location.search.substring(1).split('&');
+  for(var i = 0; pair[i]; i++) {
+    var kv = pair[i].split('=');
+    params[kv[0]] = kv[1];
+  }
+  return params;
 }
 
 function mousedown(e)  { e.preventDefault(); start(e.clientX, e.clientY); }
@@ -61,7 +79,7 @@ function stop() {
       window.clearInterval(intervalId);
       ring();
     }
-  }, 500);
+  }, sec * 1000 / 20);
 }
 
 function ring() {
